@@ -1,4 +1,5 @@
-import 'dotenv/config';
+import dotenv from "dotenv";
+dotenv.config();
 import { Schema, model, Document, Model } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt, { SignOptions } from 'jsonwebtoken';
@@ -54,6 +55,7 @@ userSchema.methods.isPasswordCorrect = async function (password: string): Promis
 };
 
 userSchema.methods.generateAccessToken = function (): string {
+  console.log("ACCESS_TOKEN_SECRET:", process.env.ACCESS_TOKEN_SECRET); // <--- Debug
   return jwt.sign(
     { _id: this._id.toString() },
     ACCESS_TOKEN_SECRET!,
