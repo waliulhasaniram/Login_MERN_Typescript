@@ -22,4 +22,8 @@ const removeRefreshToken = async (_id: string) => {
     );
 }
 
-export { getUserById, getUserByEmail, createUser, removeRefreshToken };
+const FindOneUserAndUpdate = async (_id:string, updateData: Object) => {
+    return await User.updateOne({_id:_id}, { $set: updateData }, { new: true });
+}
+
+export { getUserById, getUserByEmail, createUser, removeRefreshToken, FindOneUserAndUpdate };
