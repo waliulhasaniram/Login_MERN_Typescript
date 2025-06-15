@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import compression from "compression";
 import cors from "cors";
 import connectDB from "./utils/db";
+import router from "./route/user.route";
 
 const app = express()
 
@@ -19,6 +20,8 @@ app.use(bodyParser.json());
 app.get("/", ( _, res: express.Response)=>{
     res.status(200).json("test api")
 })
+
+app.use("/api", router);
 
 const PORT = process.env.PORT || 3000;
 
