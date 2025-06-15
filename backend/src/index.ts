@@ -1,4 +1,5 @@
-import 'dotenv/config'
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
@@ -16,6 +17,8 @@ app.use(cors({
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(express.json()) //express.json({limit: "30kb"})
+app.use(express.urlencoded({extended: true}));
 
 app.get("/", ( _, res: express.Response)=>{
     res.status(200).json("test api")

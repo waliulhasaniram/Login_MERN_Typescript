@@ -1,11 +1,11 @@
 import { User } from "../models/user.models";
 
 const getUserById = async (userId: string) => {
-    return await User.findById(userId).select("-password -refreshToken");
+    return await User.findById(userId);
 }
 
 const getUserByEmail = async (email: string) => {
-    return await User.findOne({ email }).select("-password -refreshToken");
+    return await User.findOne({ email });
 }
 
 const createUser = async (userData: { username: string; email: string; password: string }) => {
@@ -13,4 +13,13 @@ const createUser = async (userData: { username: string; email: string; password:
     return await user.save();
 }
 
-export { getUserById, getUserByEmail, createUser };
+const removeRefreshToken = async (_id: string) => {
+    // Use $set: {refreshToken: null} instead of $unset
+    return await User.findByIdAndUpdate(
+        _id,
+        { $set: { refreshToken: null } },
+        { new: true }  // Return the updated document
+    );
+}
+
+export { getUserById, getUserByEmail, createUser, removeRefreshToken };
