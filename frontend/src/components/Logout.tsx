@@ -1,9 +1,12 @@
+import { Navigate } from "react-router";
+import { useAuth } from "../contextAPI/Store";
+
 const Logout = () => {
-  return (
-    <div>
-      <h1>Logout</h1>
-    </div>
-  );
+  const auth = useAuth();
+  auth.loggout()
+
+  return <Navigate to="/signin"/>
+  
 };
 
 export default Logout;

@@ -11,7 +11,7 @@ import router from "./route/user.route";
 const app = express()
 
 const corsOptions = {
-    origin: process.env.DATABASE_URI,
+    origin: process.env.Frontend_URL,
     method: "GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS",
     credential : true
 }
