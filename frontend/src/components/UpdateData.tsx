@@ -40,8 +40,8 @@ const UpdateData = () => {
     if (authorizationToken) {
       headers["Authorization"] = authorizationToken;
     }
-    const response = await fetch(`${api_link}/update/${id}`, {
-      method: "POST",
+    const response = await fetch(`${api_link}/update/${location.state._id}`, {
+      method: "PUT",
       headers,
       body: JSON.stringify(data),
     });
@@ -70,6 +70,9 @@ const handleSubmit = (e: React.FormEvent) => {
       },
     }
   );
+
+  navigate("/"); // Redirect to home after update
+  window.location.reload(); // Reload the page to reflect changes
 };
 
   return (
