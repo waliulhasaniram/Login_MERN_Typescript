@@ -10,9 +10,13 @@ import router from "./route/user.route";
 
 const app = express()
 
-app.use(cors({
-    credentials: true
-}))
+const corsOptions = {
+    origin: process.env.DATABASE_URI,
+    method: "GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS",
+    credential : true
+}
+
+app.use(cors(corsOptions))
 
 app.use(compression());
 app.use(cookieParser());
