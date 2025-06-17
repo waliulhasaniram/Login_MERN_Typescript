@@ -1,28 +1,40 @@
+// src/hooks/updateUserQuery.ts
 import { useMutation } from "@tanstack/react-query";
 
-interface UpdateUserArgs {
+interface UpdatePayload {
   id: string;
-  data: any;
+  data: {
+    username: string;
+    email: string;
+  };
   authorizationToken?: string;
   api_link: string;
 }
 
 export function useUpdateUserMutation() {
   return useMutation({
-    mutationFn: async ({ id, data, authorizationToken, api_link }: UpdateUserArgs) => {
+    mutationFn: async ({
+      id,
+      data,
+      authorizationToken,
+      api_link,
+    }: UpdatePayload) => {
       const headers: HeadersInit = {
         "Content-Type": "application/json",
       };
       if (authorizationToken) {
         headers["Authorization"] = authorizationToken;
       }
+
       const response = await fetch(`${api_link}/update/${id}`, {
-        method: "POST",
+        method: "PUT",
         headers,
         body: JSON.stringify(data),
       });
-      if (!response.ok) throw new Error("Network response was not ok");
-      return response.json();
+
+      const resData = await response.json();
+      if (!response.ok) throw new Error(resData.message || "Update failed");
+      return resData;
     },
   });
 }
