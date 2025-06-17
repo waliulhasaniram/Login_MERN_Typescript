@@ -8,7 +8,7 @@ const Home = () => {
  const loading = auth.loading;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen min-w-3xl bg-gray-900 text-gray-100">
     <h1 className="text-3xl font-bold mb-6">Welcome to the Home</h1>
 
     <div className="w-full max-w-md bg-gray-800 shadow-lg rounded-lg p-6">

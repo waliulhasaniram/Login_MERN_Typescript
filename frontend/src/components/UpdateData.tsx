@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Input from "./common/Input";
-import { Navigate, useLocation, useNavigate } from "react-router";
+import { Navigate, NavLink, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../contextAPI/Store";
 import { useMutation } from "@tanstack/react-query";
 
@@ -76,6 +76,8 @@ const handleSubmit = (e: React.FormEvent) => {
 };
 
   return (
+    <div className="flex flex-col items-center justify-center min-h-screen min-w-3xl bg-gray-900 text-gray-100">
+    <h1 className="text-3xl font-bold mb-6">Update Data</h1>
     <form onSubmit={handleSubmit}>
       <Input
         label="Name"
@@ -93,8 +95,12 @@ const handleSubmit = (e: React.FormEvent) => {
         onChange={handleChange}
         placeholder="Email"
       />
-      <button type="submit">Update</button>
+      <button type="submit">Update your data</button>
+      <NavLink to={`/update_password/${location.state._id}`} state={location.state}>
+        <button className="ml-4 text-red-600">update password</button>
+      </NavLink>    
     </form>
+    </div>
   );
 }
 
