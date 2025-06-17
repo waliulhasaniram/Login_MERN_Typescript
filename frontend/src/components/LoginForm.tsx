@@ -2,7 +2,7 @@ import Input from "./common/Input";
 import Button from "./common/Button";
 import { useLoginLogic } from "../hooks/loginLogic";
 
-const Login = () => {
+const LoginForm = () => {
   const { loginData, handleInputChange, handleSubmit } = useLoginLogic();
 
   return (
@@ -38,4 +38,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginForm;

@@ -4,7 +4,7 @@ import Input from "./common/Input";
 import Button from "./common/Button";
 import { useRegistrationLogic } from "../hooks/registrationLogic";
 
-const Registration = () => {
+const RegistrationForm = () => {
   const navigate = useNavigate();
   const {
     regData,
@@ -56,4 +56,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default RegistrationForm;

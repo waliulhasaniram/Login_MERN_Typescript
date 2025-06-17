@@ -9,7 +9,7 @@ export const useUpdatePasswordLogic = () => {
   const location = useLocation();
   const { authorizationToken } = useAuth();
 
-  const { username, email, _id } = location.state || {};
+  const { _id } = location.state || {};
 
   const [data, setData] = useState({
     oldPassword: "",
