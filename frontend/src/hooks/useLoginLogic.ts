@@ -9,7 +9,6 @@ interface LoginData {
 }
 
 export const useLoginLogic = () => {
-  const api_link = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
   const navigate = useNavigate();
   const { storeAccessToken } = useAuth();
 
@@ -18,22 +17,27 @@ export const useLoginLogic = () => {
     password: "",
   });
 
+  const loginMutation = useLoginMutation();
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLoginData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const loginMutation = useLoginMutation(
-    loginData,
-    setLoginData,
-    navigate,
-    api_link,
-    storeAccessToken
-  );
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    loginMutation.mutate();
+
+    loginMutation.mutate(loginData, {
+      onSuccess: (data) => {
+        storeAccessToken(data.data.accessToken);
+        setLoginData({ email: "", password: "" });
+        navigate("/");
+        window.location.reload();
+      },
+      onError: (error: unknown) => {
+        console.error("Login error:", error);
+      },
+    });
   };
 
   return {

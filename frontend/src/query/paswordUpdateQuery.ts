@@ -1,24 +1,17 @@
-// src/hooks/updateUserQuery.ts
 import { useMutation } from "@tanstack/react-query";
 
-interface UpdatePayload {
+interface PasswordUpdatePayload {
   id: string;
   data: {
-    username: string;
-    email: string;
+    oldPassword: string;
+    newPassword: string;
   };
   authorizationToken?: string;
-  api_link: string;
 }
 
-export function useUpdateUserMutation() {
+export function useUpdatePasswordMutation() {
   return useMutation({
-    mutationFn: async ({
-      id,
-      data,
-      authorizationToken,
-      api_link,
-    }: UpdatePayload) => {
+    mutationFn: async ({ id, data, authorizationToken }: PasswordUpdatePayload) => {
       const headers: HeadersInit = {
         "Content-Type": "application/json",
       };
@@ -26,14 +19,15 @@ export function useUpdateUserMutation() {
         headers["Authorization"] = authorizationToken;
       }
 
-      const response = await fetch(`${api_link}/update/${id}`, {
+      const apiLink = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
+      const response = await fetch(`${apiLink}/update-password/${id}`, {
         method: "PUT",
         headers,
         body: JSON.stringify(data),
       });
 
       const resData = await response.json();
-      if (!response.ok) throw new Error(resData.message || "Update failed");
+      if (!response.ok) throw new Error(resData.message || "Password update failed");
       return resData;
     },
   });

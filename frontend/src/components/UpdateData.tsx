@@ -1,6 +1,6 @@
 import Input from "./common/Input";
 import { NavLink } from "react-router-dom";
-import { useUpdateUserLogic } from "../hooks/updateUserLogic";
+import { useUpdateUserLogic } from "../hooks/useUpdateUserLogic";
 
 const UpdateData = () => {
   const { data, handleChange, handleSubmit, location } = useUpdateUserLogic();
@@ -26,7 +26,7 @@ const UpdateData = () => {
           placeholder="Email"
         />
         <button type="submit">Update your data</button>
-        <NavLink to={`/update_password/${location.state._id}`} state={location.state}>
+        <NavLink to={`/update-password/${location.state._id}`} state={location.state}>
           <button className="ml-4 text-red-600">Update password</button>
         </NavLink>
       </form>

@@ -1,6 +1,6 @@
 import Input from "./common/Input";
 import Button from "./common/Button";
-import { useLoginLogic } from "../hooks/loginLogic";
+import { useLoginLogic } from "../hooks/useLoginLogic";
 
 const LoginForm = () => {
   const { loginData, handleInputChange, handleSubmit } = useLoginLogic();

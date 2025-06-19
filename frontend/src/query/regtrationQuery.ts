@@ -7,14 +7,12 @@ interface RegData {
 }
 
 export function useRegistrationMutation(
-  regData: RegData,
-  setRegData: (data: RegData) => void,
-  navigate: (path: string) => void,
-  api_link: string
+  regData: RegData
 ) {
   return useMutation({
     mutationFn: async () => {
-      const response = await fetch(`${api_link}/signup`, {
+      const apiLink = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
+      const response = await fetch(`${apiLink}/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(regData),
@@ -23,14 +21,6 @@ export function useRegistrationMutation(
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Registration failed");
       return data;
-    },
-    onSuccess: () => {
-      setRegData({ username: "", email: "", password: "" });
-      navigate("/signin");
-      window.location.reload();
-    },
-    onError: (error: unknown) => {
-      console.error("Registration error:", error);
     },
   });
 }

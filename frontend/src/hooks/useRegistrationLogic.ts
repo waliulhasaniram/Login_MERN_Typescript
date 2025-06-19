@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { useRegistrationMutation } from "../query/regtrationQuery";
 
 interface RegData {
@@ -7,8 +8,8 @@ interface RegData {
   password: string;
 }
 
-export const useRegistrationLogic = (navigate: (path: string) => void) => {
-  const api_link = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
+export const useRegistrationLogic = () => {
+  const navigate = useNavigate();
 
   const [regData, setRegData] = useState<RegData>({
     username: "",
@@ -16,16 +17,26 @@ export const useRegistrationLogic = (navigate: (path: string) => void) => {
     password: "",
   });
 
+  const registrationMutation = useRegistrationMutation(regData);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setRegData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const registrationMutation = useRegistrationMutation(regData, setRegData, navigate, api_link);
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    registrationMutation.mutate();
+
+    registrationMutation.mutate(undefined, {
+      onSuccess: () => {
+        setRegData({ username: "", email: "", password: "" });
+        navigate("/signin");
+        window.location.reload();
+      },
+      onError: (error: unknown) => {
+        console.error("Registration error:", error);
+      },
+    });
   };
 
   return {

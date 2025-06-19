@@ -1,16 +1,9 @@
-
-import { useNavigate } from "react-router";
 import Input from "./common/Input";
 import Button from "./common/Button";
-import { useRegistrationLogic } from "../hooks/registrationLogic";
+import { useRegistrationLogic } from "../hooks/useRegistrationLogic";
 
 const RegistrationForm = () => {
-  const navigate = useNavigate();
-  const {
-    regData,
-    handleInputChange,
-    handleSubmit,
-  } = useRegistrationLogic(navigate);
+  const { regData, handleInputChange, handleSubmit } = useRegistrationLogic();
 
   return (
     <div className="min-h-screen min-w-3xl flex items-center justify-center bg-gray-900">

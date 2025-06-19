@@ -5,7 +5,6 @@ import { useAuth } from "../contextAPI/Store";
 import { useUpdateUserMutation } from "../query/updateUserQuery";
 
 export const useUpdateUserLogic = () => {
-  const api_link = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
   const navigate = useNavigate();
   const location = useLocation();
   const { authorizationToken } = useAuth();
@@ -29,8 +28,7 @@ export const useUpdateUserLogic = () => {
       {
         id: _id,
         data,
-        authorizationToken,
-        api_link,
+        authorizationToken
       },
       {
         onSuccess: (result) => {

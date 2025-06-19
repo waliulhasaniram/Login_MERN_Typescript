@@ -4,7 +4,6 @@ import { useAuth } from "../contextAPI/Store";
 import { useUpdatePasswordMutation } from "../query/paswordUpdateQuery";
 
 export const useUpdatePasswordLogic = () => {
-  const api_link = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
   const navigate = useNavigate();
   const location = useLocation();
   const { authorizationToken } = useAuth();
@@ -28,8 +27,7 @@ export const useUpdatePasswordLogic = () => {
       {
         id: _id,
         data,
-        authorizationToken,
-        api_link,
+        authorizationToken
       },
       {
         onSuccess: (resData) => {

@@ -1,5 +1,5 @@
 import Input from "./common/Input";
-import { useUpdatePasswordLogic } from "../hooks/passwordUpdateLogic";
+import { useUpdatePasswordLogic } from "../hooks/useUpdatePasswordLogic";
 
 const PasswordUpdate = () => {
   const { data, handleChange, handleSubmit, location } = useUpdatePasswordLogic();

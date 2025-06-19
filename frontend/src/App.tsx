@@ -17,8 +17,8 @@ function App() {
             <Route path="/signup" element={<RegistrationForm />}/>
             <Route path="/signin" element={<LoginForm />}/>
             <Route path="/logout" element={<Logout />}/>
-            <Route path="/update_data/:id" element={<UpdateData />}/>
-            <Route path="/update_password/:id" element={<PasswordUpdate />}/>
+            <Route path="/update-data/:id" element={<UpdateData />}/>
+            <Route path="/update-password/:id" element={<PasswordUpdate />}/>
           </Routes>
         </BrowserRouter>
     </>
