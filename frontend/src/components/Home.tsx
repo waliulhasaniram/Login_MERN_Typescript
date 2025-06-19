@@ -2,13 +2,16 @@ import { NavLink } from "react-router";
 import { useAuth } from "../contextAPI/Store";
 
 const Home = () => {
- const auth = useAuth();
- const isLoggedIn = auth.isLoggedIn;
- const loggedInUser = auth.loggedInUser;
- const loading = auth.loading;
+ const {isLoggedIn, loggedInUser, loading} = useAuth();
+//  const  = auth.isLoggedIn;
+//  const  = auth.loggedInUser;
+//  const  = auth.loading;
+
+// api fetch loading=true and isloggedIn=false 
+// AFTER api fetch done loading = false and isLoggedIn = true
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen min-w-3xl bg-gray-900 text-gray-100">
     <h1 className="text-3xl font-bold mb-6">Welcome to the Home</h1>
 
     <div className="w-full max-w-md bg-gray-800 shadow-lg rounded-lg p-6">
@@ -22,7 +25,7 @@ const Home = () => {
                     Logout
                   </button>
                 </NavLink>
-                <NavLink to={`/update_data/${loggedInUser._id}`} state={ loggedInUser }>
+                <NavLink to={`/update-data/${loggedInUser._id}`} state={ loggedInUser }>
                   <button className="w-full py-2 px-4 bg-red-600 text-white rounded-md hover:bg-red-700">
                     update data
                   </button>
