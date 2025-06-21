@@ -2,10 +2,7 @@ import { NavLink } from "react-router";
 import { useAuth } from "../contextAPI/Store";
 
 const Home = () => {
- const auth = useAuth();
- const isLoggedIn = auth.isLoggedIn;
- const loggedInUser = auth.loggedInUser;
- const loading = auth.loading;
+ const {isLoggedIn, loggedInUser, loading} = useAuth();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-gray-100">
@@ -13,7 +10,7 @@ const Home = () => {
 
     <div className="w-full max-w-md bg-gray-800 shadow-lg rounded-lg p-6">
       {isLoggedIn ? (
-        loading ? <></>:<>
+        loading ? <><h1>Loading...</h1></>:<>
                 <div className="space-y-4">
                   <p className="text-lg font-medium">Username: {loggedInUser.username}</p>
                   <p className="text-lg font-medium">Email: {loggedInUser.email}</p>
