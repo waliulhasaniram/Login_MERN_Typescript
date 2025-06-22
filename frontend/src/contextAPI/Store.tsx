@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const [loggedInUser, setLoggedInUser] = useState()
     const authorizationToken = `Bearer ${accessToken}`
-    const isLoggedIn = !!accessToken
+    const isLoggedIn = !!loggedInUser
 
     const storeAccessToken =(storeToken: string)=> {
         setAccessToken(storeToken)
