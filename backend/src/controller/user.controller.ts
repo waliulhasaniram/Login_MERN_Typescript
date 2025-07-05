@@ -128,4 +128,6 @@ const updatePassword_Controller = asyncHandler(async (req: Request, res: Respons
 });
 
 
-export {signUp_Controller, signIn_Controller, getUserData, loggout_Controller, userData_update, updatePassword_Controller};
+const authController = {signUp_Controller, signIn_Controller, getUserData, loggout_Controller, userData_update, updatePassword_Controller};
+
+export default authController;

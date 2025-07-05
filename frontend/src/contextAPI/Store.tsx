@@ -25,14 +25,14 @@ const authContext = createContext<AuthContextType>({
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
-    const api_link = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
+    const apiLink = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
     const [loading, setLoading] = useState(true)
     const [accessToken, setAccessToken] = useState<string | null>(Cookies.get("accessToken") ?? null)
 
     const [loggedInUser, setLoggedInUser] = useState()
     const authorizationToken = `Bearer ${accessToken}`
-    const isLoggedIn = !!accessToken
+    const isLoggedIn = !!loggedInUser
 
     const storeAccessToken =(storeToken: string)=> {
         setAccessToken(storeToken)
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const getUserData = async (): Promise<any> => {
-        const response = await fetch(`${api_link}/user`, {
+        const response = await fetch(`${apiLink}/user`, {
             method: "GET",
             headers: {
                 Authorization: authorizationToken
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     });
 
      const loggout =async(): Promise<any>=>{
-        const response = await fetch(`${api_link}/logout`, {
+        const response = await fetch(`${apiLink}/logout`, {
             method: "POST",
             headers: {
                 Authorization: authorizationToken
